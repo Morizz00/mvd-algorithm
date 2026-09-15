@@ -1,0 +1,4 @@
+The quick brown fox jumps over the lazy dog
+HELLO WORLD
+Programming in Python is fun
+Beautiful weather today

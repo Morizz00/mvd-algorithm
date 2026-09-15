@@ -1,0 +1,2 @@
+# Re-download with: python phase2/fetch_real_corpora.py
+# Large .txt files are gitignored; manifest.json next door stays tracked.

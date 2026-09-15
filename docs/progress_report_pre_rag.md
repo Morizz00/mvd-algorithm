@@ -1,10 +1,11 @@
 # MVD Progress Report: Phase 0 + Phase 2 (Pre-RAG)
 
-This report summarizes everything completed and empirically verified before the
-RAG/chunking exploration (Phase 3/4). All numbers below are taken directly from
+This report summarizes everything completed and empirically verified **before**
+the RAG/chunking exploration (Phase 3/4). It is unchanged as a Phase 0+2
+record. Phase 3 Stage A has since been run: see `docs/probe_results.md`
+(Scenario 4 — do not build Phase 4). All numbers below are taken directly from
 the run logs in the repository root — `test_output.log`, `benchmark_output.log`,
-and `phase2_output.log` — not from the design spec in README.md. Nothing here is
-projected or theoretical; it is what the code actually did when run.
+and `phase2_output.log` — not from the design spec in README.md.
 
 ## Phase 0 — Baseline Reversible Transform
 
@@ -109,5 +110,5 @@ No claim about token reduction or embedding similarity under vowel-dropping has 
 | Phase 2 implementation, tests, benchmarks | Done, verified |
 | `docs/phase2_analysis.md` | Not written (this report supersedes the need for it) |
 | Phase 1 (crypto hardening) | Not started — spec only |
-| Phase 3 (token reduction / LLM) | Not started — spec only |
-| Phase 4 (RAG integration) | Not started — spec only |
+| Phase 3 (token reduction / LLM) | **Done** — see `docs/probe_results.md` (tokens −76.83%, similarity 0.1744; Scenario 4) |
+| Phase 4 (RAG integration) | **Not proceeding** — Stage A gate failed |

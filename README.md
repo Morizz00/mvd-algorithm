@@ -1,17 +1,47 @@
 # MVD: Maharashtran Vowel Disappearance
-## Complete Research Plan & Implementation Roadmap
 
-**A Language-Aware Transformation for Encryption, Compression, and LLM Pipelines**
+**Reversible vowel/consonant text transform — measured for compression and LLM/RAG proxies.**
+
+## Start here
+
+| Audience | Go to |
+|---|---|
+| New to CS / first visit | [`for-dummies/`](for-dummies/) — detailed beginner path |
+| Want the folder map | [`docs/REPO_MAP.md`](docs/REPO_MAP.md) |
+| Measured scoreboard | [`MVD_Progress_Report.md`](MVD_Progress_Report.md) |
+| Paper | [`docs/paper_draft.md`](docs/paper_draft.md) · [`docs/mvd_paper.tex`](docs/mvd_paper.tex) |
+| Unrun ideas (wordgraphs, crypto, …) | [`future-ideas/`](future-ideas/) |
+| Setup | [`requirements.txt`](requirements.txt) · [`for-dummies/07-how-to-run-the-code.md`](for-dummies/07-how-to-run-the-code.md) |
+
+Secrets stay local: copy [`.env.example`](.env.example) → `.env` if needed. Large real corpora under `data/real/raw/*.txt` are gitignored; re-fetch with `python phase2/fetch_real_corpora.py`.
+
+## Status (September 2026)
+
+Phases 0–3 Stage A are measured. Real-text compression follow-on: **CLAIM HOLDS** ([`docs/real_corpus_compression.md`](docs/real_corpus_compression.md)). Phase 4 (full RAG) does **not** proceed. Numbers: [`MVD_Progress_Report.md`](MVD_Progress_Report.md), [`docs/probe_results.md`](docs/probe_results.md).
+
+| Phase | Claim in this plan | Measured result |
+|---|---|---|
+| 0 | Reversible transform | **WIN** — 8/8 tests, 100% round-trip |
+| 2 lossless | Better gzip/bz2/zlib | **LOSS** — −119.78% avg vs raw+codec |
+| 2 lossy | Byte-level vowel-drop | **WIN** — +14.2% synthetic; **+20.47%** real ≥200 KB ([writeup](docs/real_corpus_compression.md)) |
+| 3 tokens | 15–25% fewer tokens | **LOSS** — −76.83% (tokens *increased*) |
+| 3 embeddings | cosine > 0.85 | **LOSS** — mean 0.1744, 96.67% catastrophic |
+| 1 | Key-dependent crypto | Not started |
+| 4 | End-to-end RAG | **Not proceeding** — Stage A Scenario 4 |
 
 ---
 
+## Complete research plan & implementation roadmap
+
+The sections below are the **original long roadmap** (kept for history). Prefer the measured docs above when numbers conflict with early hopes.
+
 ## Executive Summary
 
-MVD (Maharashtran Vowel Disappearance) is a reversible, key-driven text transformation that separates consonant structure from vowel information. This document combines the theoretical framework with a practical 16-week implementation plan across three primary application domains:
+MVD (Maharashtran Vowel Disappearance) is a reversible text transformation that separates consonant structure from vowel information. Key-dependence is a Phase 1 design, not a property of the implemented transform. This document combines the theoretical framework with a practical 16-week implementation plan across three primary application domains:
 
-1. **Cryptographic preprocessing primitive**
-2. **Compression-aware normalization layer**
-3. **Chunking/tokenization transform for RAG pipelines**
+1. **Cryptographic preprocessing primitive** (unstarted)
+2. **Compression-aware normalization layer** (lossy vowel-drop helps gzip; lossless MVD+codec does not)
+3. **Chunking/tokenization transform for RAG pipelines** (hypothesis tested and falsified)
 
 ---
 
@@ -452,20 +482,19 @@ def benchmark_phase0():
 
 ### Deliverables
 
-- [ ] `mvd_base.py` - Core implementation
-- [ ] `tests/test_phase0.py` - Full test suite
-- [ ] `benchmarks/phase0_perf.py` - Performance measurements
-- [ ] `docs/phase0_report.md` - Results documentation
+- [x] `src/mvd_base.py` - Core implementation
+- [x] `tests/test_phase0.py` - Full test suite
+- [x] `benchmarks/phase0_perf.py` - Performance measurements
+- [x] `docs/phase0_report.md` - Results documentation
 
 ### Metrics to Record
 
 | Metric | Target | Actual |
 |--------|--------|--------|
-| Reversibility accuracy | 100% | ___ |
-| 10KB encode time | <100ms | ___ |
-| 10KB decode time | <100ms | ___ |
-| Test coverage | >95% | ___ |
-| Edge cases handled | All | ___ |
+| Reversibility accuracy | 100% | 100% |
+| 10KB encode time | <100ms | 0.58 ms |
+| 10KB decode time | <100ms | 0.49 ms |
+| Edge cases handled | All | All (8/8 tests) |
 
 ---
 
@@ -493,6 +522,8 @@ Separating vowels from consonants creates more homogeneous streams with:
 ### Design Components
 
 #### Component 2.1: Run-Length Encoding for Masks
+AABCC
+A2B1C2
 
 ```python
 def rle_encode_mask(mask: list[int]) -> list[tuple[int, int]]:
@@ -626,17 +657,19 @@ def benchmark_compression(text: str) -> dict:
 
 ### Success Criteria
 
-- ✅ At least **5% improvement** in compression ratio for literary text
-- ✅ No degradation for any corpus type
-- ✅ Compression overhead < 10% CPU time
-- ✅ Reversibility maintained after decompression
+### Success Criteria
+
+Lossless MVD+codec on these short synthetic corpora **failed**. Lossy vowel-drop + gzip **passed** the 5% bar on average.
+
+- ❌ Lossless: at least **5% improvement** vs raw+codec — actual **−119.78%** avg
+- ✅ Lossy vowel-drop + gzip: **+14.2%** avg on synthetic corpora; **+20.47%** mean on real text ≥200 KB (`docs/real_corpus_compression.md`, CLAIM HOLDS)
+- ✅ Reversibility maintained on the lossless path (38/38 tests)
 
 ### Deliverables
 
-- [ ] `mvd_compression.py` - Compression-aware variant
-- [ ] `benchmarks/compression_suite.py` - Full benchmark
-- [ ] `results/compression_report.csv` - Data tables
-- [ ] `docs/phase2_analysis.md` - Findings document
+- [x] `phase2/mvd_comp.py` - Compression-aware variant
+- [x] Built-in compression benchmarks in `mvd_comp.py` (see `phase2_output.log`)
+- [x] `docs/progress_report_pre_rag.md` / `MVD_Progress_Report.md` - Findings
 
 ### Expected Outcomes
 
@@ -870,18 +903,20 @@ def test_retrieval_quality(corpus: list[str], queries: list[str]) -> dict:
 
 ### Success Criteria
 
-- ✅ **Token reduction: 15-25%** on average
-- ✅ **Semantic similarity: >0.85** cosine similarity
-- ✅ **Retrieval recall@5: >90%** compared to baseline
-- ✅ **No catastrophic failures** (unreadable output)
+Stage A probes (`phase3/token_probe.py`, `phase3/embedding_probe.py`) were run. Logs: `phase3_token_output.log`, `phase3_embedding_output.log`. Writeup: `docs/probe_results.md`.
+
+- ❌ **Token reduction: 15-25%** — actual **−76.83%** unweighted mean (tokens increased on 4 of 5 corpora)
+- ❌ **Semantic similarity: >0.85** — actual mean cosine **0.1744**
+- ❌ **No catastrophic failures** — **96.67%** of pairs below 0.6 similarity
+- ⬜ **Retrieval recall@5: >90%** — not measured; Stage B / Phase 4 does not proceed
 
 ### Deliverables
 
-- [ ] `mvd_llm.py` - LLM-optimized variant
+- [x] `phase3/token_probe.py` / `phase3/embedding_probe.py` — Stage A probes
+- [x] `phase3/sentences.json` — frozen sentence dataset
+- [x] `docs/probe_results.md` — decision-gate writeup
+- [ ] `mvd_llm.py` - LLM-optimized variant (not built; gate failed)
 - [ ] `experiments/tokenization_study.ipynb` - Jupyter analysis
-- [ ] `results/token_reduction_table.csv` - Token counts
-- [ ] `results/semantic_similarity.csv` - Embedding distances
-- [ ] `docs/phase3_findings.md` - Analysis writeup
 
 ### Risk Mitigation
 
@@ -2051,10 +2086,12 @@ MVD (Maharashtran Vowel Disappearance) reframes vowel redundancy as an exploitab
 - Vowel/consonant separation creates exploitable structure
 - Linguistic preprocessing can bridge byte-level and semantic-level operations
 
-**Practical:**
-- 15-25% token reduction in LLM contexts
-- 5-15% compression improvements in text
-- Measurable entropy increase for cryptographic pipelines
+**Practical (measured):**
+- Lossy vowel-drop + gzip: **+14.2%** average on Phase 2 synthetic corpora; **+20.47%** mean on real public-domain text ≥200 KB
+- Lossless MVD + gzip/bz2/zlib: **worse** than compressing raw text (−119.78% avg)
+- LLM token count: **increased** 76.83% on average (BPE fragments consonant skeletons)
+- Embedding similarity after vowel-drop: **0.1744** mean vs 0.85 target
+- Crypto entropy: **not measured** (Phase 1 unstarted)
 
 ### Not a Silver Bullet
 
@@ -2070,25 +2107,10 @@ MVD **is**:
 
 ### Next Steps
 
-**Immediate (Today):**
-1. Set up development environment
-2. Write Phase 0 proof-of-concept
-3. Test on "Hello World"
-
-**This Month:**
-1. Complete Phase 0 implementation
-2. Build test corpus
-3. Document initial findings
-
-**This Quarter:**
-1. Execute Phases 2-3
-2. Publish initial blog post
-3. Open source repository
-
-**This Year:**
-1. Complete Phase 4
-2. Submit conference paper
-3. Build community around project
+1. Write an honest negative-results paper: Phase 0+2 empirical work; Phase 3 RAG-cost hypothesis stated, tested, falsified
+2. Do **not** build Phase 4 / Stage B RAG pipeline
+3. Phase 1 (crypto) remains optional and unstarted
+4. Before open-sourcing the sentence file: news-headline licensing decision
 
 ### Final Thoughts
 
@@ -2099,7 +2121,7 @@ This is an ambitious research project spanning cryptography, compression, and ma
 - Trade-offs between compression and semantics
 - Preprocessing strategies for LLMs
 
-Start small (Phase 0), validate early (Phase 2), and build toward impact (Phase 4).
+Start small (Phase 0), validate early (Phase 2). Phase 4 is gated on Stage A — and Stage A failed.
 
 Good luck, and happy researching! 🚀
 
@@ -2109,21 +2131,23 @@ Good luck, and happy researching! 🚀
 
 ### Phase Checklist
 
-- [ ] **Phase 0:** Reversible transform working
-- [ ] **Phase 2:** Compression benchmarks complete
-- [ ] **Phase 3:** Token reduction measured
+- [x] **Phase 0:** Reversible transform working
+- [x] **Phase 2:** Compression benchmarks complete (lossless LOSS, lossy WIN)
+- [x] **Phase 3:** Token/embedding probes measured — both FAIL (Scenario 4)
 - [ ] **Phase 1:** Cryptographic hardening implemented
-- [ ] **Phase 4:** RAG system validated
+- [ ] **Phase 4:** RAG system validated — **will not proceed**
 
 ### Key Metrics Summary
 
-| Phase | Primary Metric | Target |
-|-------|----------------|--------|
-| 0 | Reversibility | 100% |
-| 1 | Entropy increase | >0.3 bits/byte |
-| 2 | Compression ratio | 5-15% improvement |
-| 3 | Token reduction | 15-25% |
-| 4 | RAG recall@5 | >95% baseline |
+| Phase | Primary Metric | Target | Actual |
+|-------|----------------|--------|--------|
+| 0 | Reversibility | 100% | 100% |
+| 1 | Entropy increase | >0.3 bits/byte | not run |
+| 2 lossless | vs raw+codec | better | −119.78% |
+| 2 lossy | gzip savings | 5-15% | **+14.2%** synthetic; **+20.47%** real ≥200 KB |
+| 3 tokens | Token reduction | 15-25% | **−76.83%** |
+| 3 embeddings | Cosine similarity | >0.85 | **0.1744** |
+| 4 | RAG recall@5 | >95% baseline | not run |
 
 ### Resource Links
 
@@ -2142,6 +2166,6 @@ Good luck, and happy researching! 🚀
 
 ---
 
-**Document Version:** 1.0  
-**Last Updated:** February 2026  
+**Document Version:** 1.1  
+**Last Updated:** September 2026  
 **Contact:** [Your research contact info]

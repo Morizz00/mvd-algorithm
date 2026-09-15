@@ -1,0 +1,45 @@
+{
+  "frozen_at": "2026-06-28",
+  "categories": {
+    "literary": [
+      {"text": "It is a truth universally acknowledged, that a single man in possession of a good fortune must be in want of a wife.", "source": "Jane Austen, Pride and Prejudice (Project Gutenberg #1342)", "synthetic": false},
+      {"text": "Call me Ishmael.", "source": "Herman Melville, Moby-Dick (Project Gutenberg #2701)", "synthetic": false},
+      {"text": "It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair, we had everything before us, we had nothing before us, we were all going direct to Heaven, we were all going direct the other way--in short, the period was so far like the present period, that some of its noisiest authorities insisted on its being received, for good or for evil, in the superlative degree of comparison only.", "source": "Charles Dickens, A Tale of Two Cities (Project Gutenberg #98)", "synthetic": false},
+      {"text": "Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do: once or twice she had peeped into the book her sister was reading, but it had no pictures or conversations in it, \"and what is the use of a book,\" thought Alice \"without pictures or conversations?\"", "source": "Lewis Carroll, Alice's Adventures in Wonderland (Project Gutenberg #11)", "synthetic": false},
+      {"text": "You will rejoice to hear that no disaster has accompanied the commencement of an enterprise which you have regarded with such evil forebodings.", "source": "Mary Shelley, Frankenstein (Project Gutenberg #84)", "synthetic": false},
+      {"text": "You don't know about me without you have read a book by the name of The Adventures of Tom Sawyer; but that ain't no matter.", "source": "Mark Twain, Adventures of Huckleberry Finn (Project Gutenberg #76)", "synthetic": false}
+    ],
+    "technical": [
+      {"text": "One of Guido's key insights is that code is read much more often than it is written.", "source": "PEP 8 (peps.python.org/pep-0008)", "synthetic": false},
+      {"text": "The key words \"MUST\", \"MUST NOT\", \"REQUIRED\", \"SHALL\", \"SHALL NOT\", \"SHOULD\", \"SHOULD NOT\", \"RECOMMENDED\", \"MAY\", and \"OPTIONAL\" in this document are to be interpreted as described in RFC 2119.", "source": "RFC 2119 (rfc-editor.org/rfc/rfc2119)", "synthetic": false},
+      {"text": "Python is an easy to learn, powerful programming language.", "source": "Python 3 official tutorial (docs.python.org/3/tutorial/index.html)", "synthetic": false},
+      {"text": "JavaScript Object Notation (JSON) is a lightweight, text-based, language-independent data interchange format.", "source": "RFC 8259 abstract (rfc-editor.org/rfc/rfc8259)", "synthetic": false},
+      {"text": "A container is a runnable instance of an image.", "source": "Docker documentation, paraphrased (docs.docker.com/get-started/docker-overview)", "synthetic": false},
+      {"text": "HTTP is a protocol for fetching resources such as HTML documents.", "source": "MDN Web Docs, HTTP overview (developer.mozilla.org/en-US/docs/Web/HTTP/Overview)", "synthetic": false}
+    ],
+    "news": [
+      {"text": "Over 500 Are Dead and Thousands Remain Missing Following Twin Earthquakes in Venezuela", "source": "Democracy Now! Headlines, June 26, 2026 (democracynow.org/2026/6/26/headlines)", "synthetic": false},
+      {"text": "The International Maritime Organization has paused its evacuation of thousands of stranded sailors and hundreds of cargo ships from the Persian Gulf.", "source": "Democracy Now! Headlines, June 26, 2026 (democracynow.org/2026/6/26/headlines)", "synthetic": false},
+      {"text": "Israeli airstrikes killed two people and wounded a third in southern Lebanon, while Israeli soldiers bulldozed and burned homes.", "source": "Democracy Now! Headlines, June 26, 2026 (democracynow.org/2026/6/26/headlines)", "synthetic": false},
+      {"text": "The Supreme Court has ruled in favor of the Trump administration's policy of denying people at the U.S.-Mexico border a chance to seek asylum.", "source": "Democracy Now! Headlines, June 26, 2026 (democracynow.org/2026/6/26/headlines)", "synthetic": false},
+      {"text": "New York City's Rent Guidelines Board has voted to freeze rents for the next two years for nearly 1 million rent-stabilized apartments.", "source": "Democracy Now! Headlines, June 26, 2026 (democracynow.org/2026/6/26/headlines)", "synthetic": false},
+      {"text": "The court ruled 7 to 2 to restrict thousands of lawsuits claiming Bayer, the parent company of Monsanto, had a duty to warn consumers about potential cancer risks from its popular weed killer Roundup.", "source": "Democracy Now! Headlines, June 26, 2026 (democracynow.org/2026/6/26/headlines)", "synthetic": false}
+    ],
+    "vowel_heavy": [
+      {"text": "The aerial audio equipment created a beautiful echo in the auditorium.", "source": "hand-constructed for this experiment (no natural vowel-heavy corpus exists)", "synthetic": true},
+      {"text": "A queue formed outside the aquarium to see the unique aquatic creatures.", "source": "hand-constructed for this experiment (no natural vowel-heavy corpus exists)", "synthetic": true},
+      {"text": "The oasis appeared as an idea too good to be true in the arid area.", "source": "hand-constructed for this experiment (no natural vowel-heavy corpus exists)", "synthetic": true},
+      {"text": "An eerie aura surrounded the ancient oak tree near the quiet bayou.", "source": "hand-constructed for this experiment (no natural vowel-heavy corpus exists)", "synthetic": true},
+      {"text": "The aviator radioed coordinates while flying over the equatorial ocean.", "source": "hand-constructed for this experiment (no natural vowel-heavy corpus exists)", "synthetic": true},
+      {"text": "Audio engineers adjusted the equalizer to remove unwanted feedback noise.", "source": "hand-constructed for this experiment (no natural vowel-heavy corpus exists)", "synthetic": true}
+    ],
+    "consonant_heavy": [
+      {"text": "Strength training strengthens wrists, ankles, and lymph flow through rhythmic stretching.", "source": "hand-constructed for this experiment (no natural consonant-heavy corpus exists)", "synthetic": true},
+      {"text": "The cryptographer deciphered glyphs scrawled across crumbling crypts and scrolls.", "source": "hand-constructed for this experiment (no natural consonant-heavy corpus exists)", "synthetic": true},
+      {"text": "Nymphs and gypsies danced to rhythmic synth scratches at midnight trysts.", "source": "hand-constructed for this experiment (no natural consonant-heavy corpus exists)", "synthetic": true},
+      {"text": "The blacksmith forged scythes, tongs, and sturdy iron clamps by twilight.", "source": "hand-constructed for this experiment (no natural consonant-heavy corpus exists)", "synthetic": true},
+      {"text": "Lymphatic dysfunction triggered strength deficits despite strict strength regimens.", "source": "hand-constructed for this experiment (no natural consonant-heavy corpus exists)", "synthetic": true},
+      {"text": "Glyphs, scripts, and crypts filled the dusty archive's forgotten shelves.", "source": "hand-constructed for this experiment (no natural consonant-heavy corpus exists)", "synthetic": true}
+    ]
+  }
+}

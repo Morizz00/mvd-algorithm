@@ -1,0 +1,96 @@
+# =============================================================================
+# MVD — public / local ignore rules
+# Nothing listed here is deleted from disk; it is only kept out of git.
+# Summaries of runs live in docs/ and MVD_Progress_Report.md — not raw logs.
+# =============================================================================
+
+# --- Secrets (never publish) ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+secrets/
+
+# --- Local / IDE / agent tooling ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.cursorindexingignore
+.specstory/
+.remember/
+.superpowers/
+.cursor/
+.claude/
+.codex/
+
+# --- Python ---
+mvd-env/
+venv/
+env/
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# --- Testing / coverage ---
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.ruff_cache/
+
+# --- Nested / accidental copies ---
+mvd-research/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Profiling ---
+*.prof
+*.lprof
+
+# --- Raw run transcripts (local only; rewrite from scripts anytime) ---
+*.log
+*_output.log
+logs/
+
+# --- Stray / demo / download duplicates at root or docs ---
+mvdlogger.py
+run_all.sh
+run_tests.sh
+setup.sh
+SETUP_INSTRUCTIONS.md
+docs/mvd_paper (1).tex
+* (1).*
+* (2).*
+* (3).*
+
+# --- Superseded internal draft reports (canonical: MVD_Progress_Report.md) ---
+docs/progress_report_pre_rag.md
+docs/phase0_report.md
+
+# --- Optional large local downloads (re-fetch with phase2/fetch_real_corpora.py) ---
+# Keep data/real/manifest.json tracked; ignore bulky frozen .txt if present.
+data/real/raw/*.txt
+
+# Empty placeholder trees under data/raw (local only)
+data/raw/**
+!data/raw/.gitkeep
+data/processed/**
+!data/processed/.gitkeep

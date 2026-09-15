@@ -13,10 +13,11 @@ verified phases:
   header overhead too costly on short text). **Lossy** vowel-dropping +
   gzip gives a real average **+14.2%** size reduction.
 
-Phase 3 (token reduction for LLMs) and Phase 4 (RAG integration) exist only
-as a design spec in `README.md` — no code, no experiments, no results. The
-README's claims about token reduction and embedding-similarity preservation
-under vowel-dropping are **projections, not measurements**.
+Phase 3 Stage A is **complete**. Results: `docs/probe_results.md`.
+Token reduction **−76.83%** (tokens increased); embedding mean **0.1744**;
+catastrophic rate **96.67%**. Decision gate: **Scenario 4** — do not build
+Stage B / Phase 4. The README's 15–25% token-cut and 0.85 similarity
+figures were projections; they are now measured and rejected.
 
 ## Problem being solved
 

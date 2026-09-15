@@ -1,0 +1,33 @@
+{
+  "frozen_at": "2026-09-15T01:36:30Z",
+  "note": "Full files frozen before real_corpus_probe.py. Slices are built deterministically by the probe.",
+  "corpora": {
+    "austen": {
+      "title": "Pride and Prejudice",
+      "genre": "literary",
+      "url": "https://www.gutenberg.org/files/1342/1342-0.txt",
+      "retrieved_at": "2026-09-15T01:36:30Z",
+      "filename": "raw/austen.txt",
+      "byte_length": 738046,
+      "sha256": "81300b79e8a8d65ac530a97578417d06137e3bbc90622a10a65e5036183d2500"
+    },
+    "rfc8259": {
+      "title": "RFC 8259 \u2014 The JavaScript Object Notation (JSON) Data Interchange Format",
+      "genre": "technical",
+      "url": "https://www.rfc-editor.org/rfc/rfc8259.txt",
+      "retrieved_at": "2026-09-15T01:36:30Z",
+      "filename": "raw/rfc8259.txt",
+      "byte_length": 28360,
+      "sha256": "61a5378f4255c720beb2a4b4a63b29540147c140f36988bf086291989b4cd2d7"
+    },
+    "frankenstein": {
+      "title": "Frankenstein",
+      "genre": "literary/prose",
+      "url": "https://www.gutenberg.org/files/84/84-0.txt",
+      "retrieved_at": "2026-09-15T01:36:30Z",
+      "filename": "raw/frankenstein.txt",
+      "byte_length": 421633,
+      "sha256": "06c37d2c52d208d3d81eb12c3b10b5edbd7728b73554325ddceadbe2fb427e77"
+    }
+  }
+}
